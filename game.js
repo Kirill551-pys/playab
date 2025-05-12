@@ -7,13 +7,11 @@ let timeLeft = 10;
 let gameInterval;
 let coinSound;
 
-// Инициализация
 function init() {
   score = 0;
   timeLeft = 10;
   coins = [];
 
-  // Загрузка звука
   coinSound = new Audio();
   coinSound.src = 'assets/sound_click.mp3';
 
@@ -29,7 +27,6 @@ function init() {
   }, 100);
 }
 
-// Создание монеток
 function createCoins(count) {
   for (let i = 0; i < count; i++) {
     coins.push({
@@ -41,21 +38,16 @@ function createCoins(count) {
   }
 }
 
-// Отрисовка
 function draw() {
-  // Фон
   ctx.fillStyle = "#1a1a1a";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Таймер
   ctx.fillStyle = "#fff";
   ctx.font = "12px Arial";
   ctx.fillText(`Time: ${timeLeft.toFixed(1)}s`, 10, 15);
 
-  // Счёт
   ctx.fillText(`Score: ${score}`, 10, 30);
 
-  // Монетки
   coins.forEach((coin, index) => {
     if (coin.visible) {
       const img = new Image();
@@ -67,7 +59,6 @@ function draw() {
   requestAnimationFrame(draw);
 }
 
-// Клик по холсту
 canvas.addEventListener("click", (e) => {
   const rect = canvas.getBoundingClientRect();
   const mouseX = e.clientX - rect.left;
@@ -86,7 +77,6 @@ canvas.addEventListener("click", (e) => {
   });
 });
 
-// Проигрывание звука
 function playSound() {
   if (coinSound) {
     coinSound.currentTime = 0;
@@ -94,7 +84,6 @@ function playSound() {
   }
 }
 
-// Конец игры
 function endGame() {
   ctx.fillStyle = "rgba(0,0,0,0.7)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -110,11 +99,9 @@ function endGame() {
   ctx.fillStyle = "#ff4d4d";
   ctx.fillText("Подробнее →", canvas.width / 2, canvas.height / 2 + 30);
 
-  // Открытие ссылки при клике
   canvas.addEventListener("click", () => {
     window.open("https://example.com ", "_blank");
   });
 }
 
-// Запуск игры
 init();
